@@ -1,15 +1,14 @@
 import 'package:e_commerce/constants.dart';
-import 'package:e_commerce/screens/signup_screen.dart';
+import 'package:e_commerce/screens/login_screen.dart';
 import 'package:e_commerce/widgets/custom_textfield.dart';
 import 'package:flutter/material.dart';
 
-class LoginScreen extends StatelessWidget {
-  static String id = 'loginScreen';
+class SignUpScreen extends StatelessWidget {
+  static String id = 'signup';
   final GlobalKey<FormState> _globalKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
-
     return Scaffold(
       backgroundColor: kMainColor,
       body: Form(
@@ -37,6 +36,16 @@ class LoginScreen extends StatelessWidget {
             ),
             SizedBox(
               height: height * .1,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: CustomTextField(
+                hint: 'Enter Your Name',
+                icon: Icons.perm_identity,
+              ),
+            ),
+            SizedBox(
+              height: height * .02,
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -70,7 +79,7 @@ class LoginScreen extends StatelessWidget {
                 },
                 color: Colors.black,
                 child: Text(
-                  'Login',
+                  'SignUp',
                   style: TextStyle(color: Colors.white),
                 ),
               ),
@@ -82,15 +91,15 @@ class LoginScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'Do not have an account ?',
+                  'Have an account ?',
                   style: TextStyle(color: Colors.white, fontSize: 16),
                 ),
                 GestureDetector(
                   onTap: () {
-                    Navigator.pushNamed(context, SignUpScreen.id);
+                    Navigator.pushNamed(context, LoginScreen.id);
                   },
                   child: Text(
-                    'SignUp',
+                    'Login',
                     style: TextStyle(fontSize: 16),
                   ),
                 ),

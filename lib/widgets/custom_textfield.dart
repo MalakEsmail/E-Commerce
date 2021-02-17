@@ -7,7 +7,13 @@ class CustomTextField extends StatelessWidget {
   CustomTextField({@required this.hint, @required this.icon});
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
+      // ignore: missing_return
+      validator: (value) {
+        if (value.isEmpty) {
+          return 'value is empty';
+        }
+      },
       cursorColor: kMainColor,
       decoration: InputDecoration(
           hintText: hint,
@@ -18,6 +24,9 @@ class CustomTextField extends StatelessWidget {
           filled: true,
           fillColor: kSecondaryColor,
           enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(20),
+              borderSide: BorderSide(color: Colors.white)),
+          border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(20),
               borderSide: BorderSide(color: Colors.white)),
           focusedBorder: OutlineInputBorder(
