@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 class CustomTextField extends StatelessWidget {
   final String hint;
   final IconData icon;
-  CustomTextField({@required this.hint, @required this.icon});
+  final Function onClick;
+  CustomTextField(
+      {@required this.onClick, @required this.hint, @required this.icon});
   @override
   Widget build(BuildContext context) {
     return TextFormField(
@@ -14,6 +16,7 @@ class CustomTextField extends StatelessWidget {
           return 'value is empty';
         }
       },
+      onSaved: onClick,
       cursorColor: kMainColor,
       decoration: InputDecoration(
           hintText: hint,
