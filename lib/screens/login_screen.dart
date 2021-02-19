@@ -1,5 +1,8 @@
 import 'package:e_commerce/constants.dart';
+import 'package:e_commerce/provider/adminmode.dart';
 import 'package:e_commerce/provider/modalhud.dart';
+import 'package:e_commerce/screens/admin_home_screen.dart';
+import 'package:e_commerce/screens/home_screen.dart';
 import 'package:e_commerce/screens/signup_screen.dart';
 import 'package:e_commerce/services/auth.dart';
 import 'package:e_commerce/widgets/custom_textfield.dart';
@@ -12,6 +15,8 @@ class LoginScreen extends StatelessWidget {
   final GlobalKey<FormState> _globalKey = GlobalKey<FormState>();
   String _email, _password;
   final _auth = Auth();
+  bool isAdmin = false;
+  final adminPassword = 'admin1234';
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -79,24 +84,8 @@ class LoginScreen extends StatelessWidget {
                   builder: (context) => FlatButton(
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20)),
-                    onPressed: () async {
-                      final modalHud =
-                          Provider.of<ModalHud>(context, listen: false);
-                      modalHud.changeIsLoading(true);
-
-                      if (_globalKey.currentState.validate()) {
-                        _globalKey.currentState.save();
-                        try {
-                          final result = await _auth.signIn(_email, _password);
-                          modalHud.changeIsLoading(false);
-                        } catch (e) {
-                          modalHud.changeIsLoading(false);
-                          Scaffold.of(context).showSnackBar(SnackBar(
-                            content: Text(e.message),
-                          ));
-                        }
-                      }
-                      modalHud.changeIsLoading(false);
+                    onPressed: () {
+                      _validate(context);
                     },
                     color: Colors.black,
                     child: Text(
@@ -126,11 +115,82 @@ class LoginScreen extends StatelessWidget {
                     ),
                   ),
                 ],
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                child: Row(
+                  children: [
+                    Expanded(
+                        child: GestureDetector(
+                      onTap: () {
+                        Provider.of<AdminMode>(context, listen: false)
+                            .changeIsAdmin(true);
+                      },
+                      child: Text(
+                        'I am an Admin',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            color: Provider.of<AdminMode>(context).isAdmin
+                                ? kMainColor
+                                : Colors.white),
+                      ),
+                    )),
+                    Expanded(
+                        child: GestureDetector(
+                      onTap: () {
+                        Provider.of<AdminMode>(context, listen: false)
+                            .changeIsAdmin(false);
+                      },
+                      child: Text(
+                        'I am a User',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            color: Provider.of<AdminMode>(context).isAdmin
+                                ? Colors.white
+                                : kMainColor),
+                      ),
+                    ))
+                  ],
+                ),
               )
             ],
           ),
         ),
       ),
     );
+  }
+
+  void _validate(BuildContext context) async {
+    final modalHud = Provider.of<ModalHud>(context, listen: false);
+    modalHud.changeIsLoading(true);
+
+    if (_globalKey.currentState.validate()) {
+      _globalKey.currentState.save();
+
+      if (Provider.of<AdminMode>(context, listen: false).isAdmin) {
+        if (adminPassword == _password) {
+          final result = await _auth.signIn(_email, _password);
+          modalHud.changeIsLoading(false);
+          Navigator.pushNamed(context, AdminHomeScreen.id);
+        } else {
+          modalHud.changeIsLoading(false);
+          Scaffold.of(context).showSnackBar(SnackBar(
+            content: Text('SomeThing wrong !'),
+          ));
+        }
+      } else {
+        try {
+          final result = await _auth.signIn(_email, _password);
+          modalHud.changeIsLoading(false);
+          Navigator.pushNamed(context, HomeScreen.id);
+        } catch (e) {
+          modalHud.changeIsLoading(false);
+          Scaffold.of(context).showSnackBar(SnackBar(
+            content: Text(e.message),
+          ));
+        }
+      }
+    }
+    modalHud.changeIsLoading(false);
   }
 }
