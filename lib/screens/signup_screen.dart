@@ -1,6 +1,6 @@
 import 'package:e_commerce/constants.dart';
 import 'package:e_commerce/provider/modalhud.dart';
-import 'package:e_commerce/screens/home_screen.dart';
+import 'package:e_commerce/screens/users/home_screen.dart';
 import 'package:e_commerce/screens/login_screen.dart';
 import 'package:e_commerce/services/auth.dart';
 import 'package:e_commerce/widgets/custom_textfield.dart';

@@ -1,8 +1,8 @@
 import 'package:e_commerce/constants.dart';
 import 'package:e_commerce/provider/adminmode.dart';
 import 'package:e_commerce/provider/modalhud.dart';
-import 'package:e_commerce/screens/admin_home_screen.dart';
-import 'package:e_commerce/screens/home_screen.dart';
+import 'package:e_commerce/screens/admin/admin_home_screen.dart';
+import 'package:e_commerce/screens/users/home_screen.dart';
 import 'package:e_commerce/screens/signup_screen.dart';
 import 'package:e_commerce/services/auth.dart';
 import 'package:e_commerce/widgets/custom_textfield.dart';
@@ -169,9 +169,16 @@ class LoginScreen extends StatelessWidget {
 
       if (Provider.of<AdminMode>(context, listen: false).isAdmin) {
         if (adminPassword == _password) {
-          final result = await _auth.signIn(_email, _password);
-          modalHud.changeIsLoading(false);
-          Navigator.pushNamed(context, AdminHomeScreen.id);
+          try {
+            final result = await _auth.signIn(_email, _password);
+            modalHud.changeIsLoading(false);
+            Navigator.pushNamed(context, AdminHomeScreen.id);
+          } catch (e) {
+            modalHud.changeIsLoading(false);
+            Scaffold.of(context).showSnackBar(SnackBar(
+              content: Text(e.message),
+            ));
+          }
         } else {
           modalHud.changeIsLoading(false);
           Scaffold.of(context).showSnackBar(SnackBar(
