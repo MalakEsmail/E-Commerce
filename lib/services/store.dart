@@ -4,6 +4,7 @@ import 'package:e_commerce/models/product.dart';
 
 class Store {
   final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
+
   addProduct(Product product) {
     Map<String, dynamic> data = {
       kProductName: product.pName,
@@ -18,5 +19,13 @@ class Store {
 
   Stream<QuerySnapshot> getProducts() {
     return _fireStore.collection(kProductsCollection).snapshots();
+  }
+
+  deleteProduct(documentId) {
+    _fireStore.collection(kProductsCollection).doc(documentId).delete();
+  }
+
+  editProduct(data, documentId) {
+    _fireStore.collection(kProductsCollection).doc(documentId).update(data);
   }
 }
