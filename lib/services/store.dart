@@ -4,13 +4,19 @@ import 'package:e_commerce/models/product.dart';
 
 class Store {
   final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
-  addProduct(Product product) async {
-    await _fireStore.collection(kProductsCollection).add({
+  addProduct(Product product) {
+    Map<String, dynamic> data = {
       kProductName: product.pName,
       kProductPrice: product.pPrice,
       kProductCategory: product.pCategory,
-      kProductDescription: product..pDescription,
+      kProductDescription: product.pDescription,
       kProductLocation: product.pLocation,
-    });
+    };
+
+    _fireStore.collection(kProductsCollection).add(data);
+  }
+
+  Stream<QuerySnapshot> getProducts() {
+    return _fireStore.collection(kProductsCollection).snapshots();
   }
 }

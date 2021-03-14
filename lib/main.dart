@@ -2,6 +2,7 @@ import 'package:e_commerce/provider/adminmode.dart';
 import 'package:e_commerce/provider/modalhud.dart';
 import 'package:e_commerce/screens/admin/add_product.dart';
 import 'package:e_commerce/screens/admin/admin_home_screen.dart';
+import 'package:e_commerce/screens/admin/edit_product.dart';
 import 'package:e_commerce/screens/users/home_screen.dart';
 import 'package:e_commerce/screens/login_screen.dart';
 import 'package:e_commerce/screens/signup_screen.dart';
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
         HomeScreen.id: (context) => HomeScreen(),
         AdminHomeScreen.id: (context) => AdminHomeScreen(),
         AddProduct.id: (context) => AddProduct(),
+        EditProduct.id: (context) => EditProduct(),
       }),
     );
   }

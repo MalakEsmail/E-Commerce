@@ -1,5 +1,6 @@
 import 'package:e_commerce/constants.dart';
 import 'package:e_commerce/screens/admin/add_product.dart';
+import 'package:e_commerce/screens/admin/edit_product.dart';
 import 'package:flutter/material.dart';
 
 class AdminHomeScreen extends StatelessWidget {
@@ -22,7 +23,9 @@ class AdminHomeScreen extends StatelessWidget {
             child: Text('Add Product'),
           ),
           RaisedButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(context, EditProduct.id);
+            },
             child: Text('Edit Product'),
           ),
           RaisedButton(

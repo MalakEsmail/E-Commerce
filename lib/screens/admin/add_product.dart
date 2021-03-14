@@ -17,6 +17,7 @@ class AddProduct extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             CustomTextField(
+              icon: Icons.add,
               hint: 'Product Name',
               onClick: (value) {
                 _name = value;
@@ -26,6 +27,7 @@ class AddProduct extends StatelessWidget {
               height: 10,
             ),
             CustomTextField(
+              icon: Icons.add,
               hint: 'Product Price',
               onClick: (value) {
                 _price = value;
@@ -35,6 +37,7 @@ class AddProduct extends StatelessWidget {
               height: 10,
             ),
             CustomTextField(
+              icon: Icons.add,
               hint: 'Product Description',
               onClick: (value) {
                 _description = value;
@@ -44,6 +47,7 @@ class AddProduct extends StatelessWidget {
               height: 10,
             ),
             CustomTextField(
+              icon: Icons.add,
               hint: 'Product Category',
               onClick: (value) {
                 _category = value;
@@ -53,6 +57,7 @@ class AddProduct extends StatelessWidget {
               height: 10,
             ),
             CustomTextField(
+              icon: Icons.add,
               hint: 'Product location',
               onClick: (value) {
                 _location = value;
@@ -62,15 +67,17 @@ class AddProduct extends StatelessWidget {
               height: 20,
             ),
             FlatButton(
-              onPressed: () async {
+              onPressed: () {
                 if (_key.currentState.validate()) {
                   _key.currentState.save();
-                  await _store.addProduct(Product(
-                      pName: _name,
-                      pCategory: _category,
-                      pDescription: _description,
-                      pLocation: _location,
-                      pPrice: _price));
+                  print(_location);
+                  _store.addProduct(Product(
+                    pName: _name,
+                    pPrice: _price,
+                    pDescription: _description,
+                    pLocation: _location,
+                    pCategory: _category,
+                  ));
                 }
               },
               child: Text('Add Product'),
