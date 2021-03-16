@@ -14,4 +14,8 @@ class Auth {
         email: email, password: password);
     return _authResult;
   }
+
+  Future<User> getUser() async {
+    return await _auth.currentUser;
+  }
 }
