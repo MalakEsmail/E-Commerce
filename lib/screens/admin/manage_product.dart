@@ -3,6 +3,7 @@ import 'package:e_commerce/constants.dart';
 import 'package:e_commerce/models/product.dart';
 import 'package:e_commerce/screens/admin/edit_product.dart';
 import 'package:e_commerce/services/store.dart';
+import 'package:e_commerce/widgets/custom_menu.dart';
 import 'package:flutter/material.dart';
 
 class ManageProduct extends StatefulWidget {
@@ -114,24 +115,5 @@ class _ManageProductState extends State<ManageProduct> {
         },
       ),
     );
-  }
-}
-
-class MyPopupMenuItem<T> extends PopupMenuItem<T> {
-  final Widget child;
-  final Function onClick;
-  MyPopupMenuItem({@required this.child, @required this.onClick})
-      : super(child: child);
-  @override
-  PopupMenuItemState<T, PopupMenuItem<T>> createState() {
-    return MyPopupMenuItemState();
-  }
-}
-
-class MyPopupMenuItemState<T, PopMenuItem>
-    extends PopupMenuItemState<T, MyPopupMenuItem<T>> {
-  @override
-  void handleTap() {
-    widget.onClick();
   }
 }

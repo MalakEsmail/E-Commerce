@@ -5,8 +5,10 @@ class Product {
   String pLocation;
   String pCategory;
   String pId;
+  int pQuantity;
   Product(
-      {this.pId,
+      {this.pQuantity,
+      this.pId,
       this.pName,
       this.pPrice,
       this.pDescription,

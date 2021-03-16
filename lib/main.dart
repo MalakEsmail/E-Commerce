@@ -1,9 +1,11 @@
 import 'package:e_commerce/provider/adminmode.dart';
+import 'package:e_commerce/provider/card_item.dart';
 import 'package:e_commerce/provider/modalhud.dart';
 import 'package:e_commerce/screens/admin/add_product.dart';
 import 'package:e_commerce/screens/admin/admin_home_screen.dart';
 import 'package:e_commerce/screens/admin/edit_product.dart';
 import 'package:e_commerce/screens/admin/manage_product.dart';
+import 'package:e_commerce/screens/users/cart_screen.dart';
 import 'package:e_commerce/screens/users/home_screen.dart';
 import 'package:e_commerce/screens/login_screen.dart';
 import 'package:e_commerce/screens/signup_screen.dart';
@@ -28,10 +30,14 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider<AdminMode>(
           create: (context) => AdminMode(),
+        ),
+        ChangeNotifierProvider<CartItem>(
+          create: (context) => CartItem(),
         )
       ],
       child: MaterialApp(initialRoute: LoginScreen.id, routes: {
         LoginScreen.id: (context) => LoginScreen(),
+        CartScreen.id: (context) => CartScreen(),
         SignUpScreen.id: (context) => SignUpScreen(),
         HomeScreen.id: (context) => HomeScreen(),
         AdminHomeScreen.id: (context) => AdminHomeScreen(),

@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_commerce/constants.dart';
 import 'package:e_commerce/functions.dart';
 import 'package:e_commerce/models/product.dart';
+import 'package:e_commerce/screens/users/cart_screen.dart';
 import 'package:e_commerce/screens/users/product_info.dart';
 import 'package:e_commerce/services/auth.dart';
 import 'package:e_commerce/services/store.dart';
@@ -122,7 +123,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   GestureDetector(
                       onTap: () {
-                        // Navigator.pushNamed(context, CartScreen.id);
+                        Navigator.pushNamed(context, CartScreen.id);
                       },
                       child: Icon(Icons.shopping_cart))
                 ],
