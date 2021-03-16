@@ -21,11 +21,37 @@ class Store {
     return _fireStore.collection(kProductsCollection).snapshots();
   }
 
+  Stream<QuerySnapshot> loadOrders() {
+    return _fireStore.collection(kOrders).snapshots();
+  }
+
+  Stream<QuerySnapshot> loadOrderDetails(documentId) {
+    return _fireStore
+        .collection(kOrders)
+        .doc(documentId)
+        .collection(kOrderDetails)
+        .snapshots();
+  }
+
   deleteProduct(documentId) {
     _fireStore.collection(kProductsCollection).doc(documentId).delete();
   }
 
   editProduct(data, documentId) {
     _fireStore.collection(kProductsCollection).doc(documentId).update(data);
+  }
+
+  storeOrders(data, List<Product> products) {
+    var documentRef = _fireStore.collection(kOrders).doc();
+    documentRef.set(data);
+    for (var product in products) {
+      documentRef.collection(kOrderDetails).doc().set({
+        kProductName: product.pName,
+        kProductPrice: product.pPrice,
+        kProductQuantity: product.pQuantity,
+        kProductLocation: product.pLocation,
+        kProductCategory: product.pCategory
+      });
+    }
   }
 }

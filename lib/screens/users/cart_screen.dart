@@ -184,8 +184,8 @@ class CartScreen extends StatelessWidget {
           onPressed: () {
             try {
               Store _store = Store();
-              /*   _store.storeOrders(
-                  {kTotallPrice: price, kAddress: address}, products);*/
+              _store.storeOrders(
+                  {kTotallPrice: price, kAddress: address}, products);
 
               Scaffold.of(context).showSnackBar(SnackBar(
                 content: Text('Orderd Successfully'),

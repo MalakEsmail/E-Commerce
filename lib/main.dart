@@ -5,6 +5,8 @@ import 'package:e_commerce/screens/admin/add_product.dart';
 import 'package:e_commerce/screens/admin/admin_home_screen.dart';
 import 'package:e_commerce/screens/admin/edit_product.dart';
 import 'package:e_commerce/screens/admin/manage_product.dart';
+import 'package:e_commerce/screens/admin/order_details.dart';
+import 'package:e_commerce/screens/admin/order_screen.dart';
 import 'package:e_commerce/screens/users/cart_screen.dart';
 import 'package:e_commerce/screens/users/home_screen.dart';
 import 'package:e_commerce/screens/login_screen.dart';
@@ -36,7 +38,9 @@ class MyApp extends StatelessWidget {
         )
       ],
       child: MaterialApp(initialRoute: LoginScreen.id, routes: {
+        OrderDetails.id: (context) => OrderDetails(),
         LoginScreen.id: (context) => LoginScreen(),
+        OrdersScreen.id: (context) => OrdersScreen(),
         CartScreen.id: (context) => CartScreen(),
         SignUpScreen.id: (context) => SignUpScreen(),
         HomeScreen.id: (context) => HomeScreen(),
